@@ -1,0 +1,10 @@
+@model List<MyWork2.Web.Models.StockItem>
+<h2>Склад</h2>
+<table class="table table-striped table-sm">
+<thead><tr><th>ID</th><th>Название</th><th>Категория</th><th>Бренд</th><th>Остаток</th><th>Цена</th></tr></thead>
+<tbody>
+@foreach (var item in Model) {
+<tr><td>@item.Id</td><td>@item.Naimenovanie</td><td>@item.Kategoriya</td><td>@item.Brand @item.Model</td><td>@item.CountOf</td><td>@item.Price</td></tr>
+}
+</tbody>
+</table>

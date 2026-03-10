@@ -1,0 +1,25 @@
+# MyWork2 Legacy → Web Migration
+
+Этот репозиторий содержит:
+1. Legacy WinForms приложение `MyWork2` (.NET Framework 4.8).
+2. Новое web-приложение `MyWork2.Web` (ASP.NET Core MVC + Bootstrap 5).
+
+## Статус
+- Выполнены аудит legacy, функциональная карта и матрица parity.
+- Запущен базовый перенос ключевых модулей: заказы (`Catalog`), клиенты (`Clients`), склад (`Stock`), главная панель.
+- Остальной функционал зафиксирован как migration gaps и запланирован к переносу по этапам.
+
+## Документы миграции
+- `LEGACY_AUDIT.md`
+- `FUNCTIONAL_MAP.md`
+- `UI_PARITY_MATRIX.md`
+- `DB_USAGE_MAP.md`
+- `MIGRATION_PLAN.md`
+- `MIGRATION_GAPS.md`
+- `DEV_LOG.md`
+
+## Запуск web-версии (Ubuntu)
+1. Установить .NET SDK 8.
+2. Настроить MariaDB/MySQL и применить `scheme.sql`.
+3. Обновить `MyWork2.Web/appsettings.json`.
+4. Выполнить `dotnet run --project MyWork2.Web`.

@@ -1,0 +1,13 @@
+@model MyWork2.Web.Models.CatalogItem
+<h2>Карточка заказа</h2>
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="Id"/>
+    <div class="col-md-4"><label class="form-label">Клиент</label><input asp-for="surname" class="form-control"/></div>
+    <div class="col-md-4"><label class="form-label">Телефон</label><input asp-for="phone" class="form-control"/></div>
+    <div class="col-md-4"><label class="form-label">Вид ремонта</label><input asp-for="WhatRemont" class="form-control"/></div>
+    <div class="col-md-4"><label class="form-label">Бренд</label><input asp-for="brand" class="form-control"/></div>
+    <div class="col-md-4"><label class="form-label">Модель</label><input asp-for="model" class="form-control"/></div>
+    <div class="col-md-4"><label class="form-label">Статус</label><input asp-for="Status_remonta" class="form-control"/></div>
+    <div class="col-12"><label class="form-label">Неисправность</label><textarea asp-for="polomka" class="form-control"></textarea></div>
+    <div class="col-12"><button class="btn btn-primary">Сохранить</button></div>
+</form>
