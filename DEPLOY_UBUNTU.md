@@ -105,6 +105,14 @@ mysql -u tolyapp -p tolyabase < scheme.sql
 
 Рекомендовано для production вынести секреты в переменные окружения/systemd, а не хранить пароль в git.
 
+Для размещения приложения по пути `https://prostochatbot.ru/tolyaprogram` оставьте:
+
+```json
+"ReverseProxy": {
+  "PathBase": "/tolyaprogram"
+}
+```
+
 ---
 
 ## 5) Сборка и публикация
@@ -186,6 +194,8 @@ journalctl -u mywork2-web -f
 
 ## 7) Настроить Nginx reverse proxy
 
+### 7.1 Если это отдельный домен/сайт
+
 Файл `/etc/nginx/sites-available/mywork2-web`:
 
 ```nginx
@@ -205,6 +215,41 @@ server {
     }
 }
 ```
+
+### 7.2 Если у вас уже есть сайт `https://prostochatbot.ru/` и нужен путь `/tolyaprogram`
+
+В существующий `server { ... }` для `prostochatbot.ru` добавьте:
+
+```nginx
+location = /tolyaprogram {
+    return 301 /tolyaprogram/;
+}
+
+location /tolyaprogram/ {
+    proxy_pass         http://127.0.0.1:5000;
+    proxy_http_version 1.1;
+    proxy_set_header   Upgrade $http_upgrade;
+    proxy_set_header   Connection keep-alive;
+    proxy_set_header   Host $host;
+    proxy_cache_bypass $http_upgrade;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+}
+```
+
+После изменений:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Проверьте извне:
+
+```bash
+curl -I https://prostochatbot.ru/tolyaprogram/
+```
+
 
 Включить сайт:
 

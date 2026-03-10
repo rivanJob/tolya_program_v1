@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using MyWork2.Web.Data;
 using MyWork2.Web.Services;
@@ -9,11 +10,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 builder.Services.AddScoped<IRepairOrderService, RepairOrderService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IStockService, StockService>();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
+
+var pathBase = builder.Configuration["ReverseProxy:PathBase"];
+if (!string.IsNullOrWhiteSpace(pathBase))
+{
+    app.UsePathBase(pathBase);
+}
 
 if (!app.Environment.IsDevelopment())
 {
