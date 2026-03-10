@@ -109,12 +109,31 @@ mysql -u tolyapp -p tolyabase < scheme.sql
 
 ## 5) Сборка и публикация
 
-Из корня репозитория:
+> Важно: ошибка `MSB1009: файл проекта не существует` обычно означает, что указан неверный путь к `.csproj`.
+
+### Вариант A — вы находитесь в корне репозитория (например `/opt/tolya_program_v1`)
 
 ```bash
 dotnet restore MyWork2.Web/MyWork2.Web.csproj
 dotnet publish MyWork2.Web/MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
 ```
+
+### Вариант B — вы уже внутри папки проекта (например `/var/www/MyWork2.Web`)
+
+```bash
+dotnet restore MyWork2.Web.csproj
+dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
+```
+
+### Быстрая диагностика пути
+
+```bash
+pwd
+ls
+find . -maxdepth 3 -name "*.csproj"
+```
+
+Если команда нашла файл `./MyWork2.Web.csproj`, используйте путь без префикса `MyWork2.Web/`.
 
 Назначить владельца:
 
@@ -208,10 +227,20 @@ sudo systemctl reload nginx
 
 ## 9) Обновление версии приложения
 
+### Если вы в корне репозитория
+
 ```bash
-# в директории с кодом
 sudo systemctl stop mywork2-web
 dotnet publish MyWork2.Web/MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
+sudo chown -R www-data:www-data /var/www/mywork2-web
+sudo systemctl start mywork2-web
+```
+
+### Если вы в папке проекта (`/var/www/MyWork2.Web`)
+
+```bash
+sudo systemctl stop mywork2-web
+dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
 sudo chown -R www-data:www-data /var/www/mywork2-web
 sudo systemctl start mywork2-web
 ```
@@ -232,3 +261,14 @@ sudo systemctl start mywork2-web
 4. **После деплоя нет новых изменений**
    - Проверить, что publish делался в ту же папку `/var/www/mywork2-web`.
 
+
+5. **MSBUILD : error MSB1009: файл проекта не существует**
+   - Вы запускаете команду из неверной директории или указали лишний префикс пути.
+   - Пример: если текущая папка `/var/www/MyWork2.Web`, правильно так:
+
+```bash
+dotnet restore MyWork2.Web.csproj
+dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
+```
+
+   - Проверка: `find . -maxdepth 3 -name "*.csproj"`.
