@@ -39,3 +39,6 @@
 
 
 В `DEPLOY_UBUNTU.md` добавлен готовый пример Nginx-конфига для `prostochatbot.ru` + `/tolyaprogram`.
+
+
+Добавлена отдельная секция `502 Bad Gateway` диагностики в `DEPLOY_UBUNTU.md` (systemd + nginx + healthz).

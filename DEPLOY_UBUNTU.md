@@ -99,6 +99,9 @@ mysql -u tolyapp -p tolyabase < scheme.sql
 {
   "ConnectionStrings": {
     "DefaultConnection": "server=127.0.0.1;port=3306;database=tolyabase;user=tolyapp;password=StrongPasswordHere!;"
+  },
+  "Database": {
+    "MariaDbVersion": "10.4.32"
   }
 }
 ```
@@ -443,4 +446,52 @@ sudo systemctl cat mywork2-web
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart mywork2-web
+```
+
+
+---
+
+## 12) 502 Bad Gateway — диагностика за 2 минуты
+
+Если видите `502 Bad Gateway`, почти всегда Nginx не может достучаться до Kestrel на `127.0.0.1:5000`.
+
+Запустите этот набор команд:
+
+```bash
+# 1) Жив ли сервис ASP.NET Core
+systemctl status mywork2-web --no-pager
+journalctl -u mywork2-web -n 100 --no-pager
+
+# 2) Слушается ли порт 5000
+ss -ltnp | rg ':5000' || true
+curl -I http://127.0.0.1:5000
+curl -I http://127.0.0.1:5000/healthz
+
+# 3) Проверка nginx
+sudo nginx -t
+sudo tail -n 100 /var/log/nginx/error.log
+```
+
+### Частые причины 502
+1. Сервис не запущен (`inactive/dead`) — поднимите `enable --now`, см. раздел 11.
+2. Путь в `ExecStart` неверный (не найден `MyWork2.Web.dll`).
+3. Приложение падает при старте из-за некорректной строки подключения к БД.
+4. В Nginx location для `/tolyaprogram/` отсутствует/ошибочен `proxy_pass`.
+
+### Быстрый фикс, если сервис не стартует
+
+```bash
+cd /var/www/MyWork2.Web
+dotnet restore MyWork2.Web.csproj
+dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
+sudo chown -R www-data:www-data /var/www/mywork2-web
+sudo systemctl daemon-reload
+sudo systemctl enable --now mywork2-web
+```
+
+После этого ещё раз:
+
+```bash
+curl -I http://127.0.0.1:5000/healthz
+curl -I https://prostochatbot.ru/tolyaprogram/
 ```

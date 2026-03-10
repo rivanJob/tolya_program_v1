@@ -5,11 +5,14 @@ using MyWork2.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var mariadbVersion = builder.Configuration["Database:MariaDbVersion"] ?? "10.4.32";
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+        connectionString,
+        new MariaDbServerVersion(Version.Parse(mariadbVersion))));
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
@@ -40,6 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+
+app.MapGet("/healthz", () => Results.Ok(new { status = "ok" }));
 
 app.MapControllerRoute(
     name: "default",

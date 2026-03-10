@@ -14,3 +14,4 @@
 - Добавлена конфигурация запуска под подпутём `/tolyaprogram` (Nginx + `ReverseProxy:PathBase`) для `prostochatbot.ru`.
 - Добавлен recovery-runbook для кейса `systemd: inactive (dead)` и `curl 127.0.0.1:5000` connection refused.
 - Добавлен готовый пример Nginx для текущего боевого конфига `prostochatbot.ru` (PHP-сайт + ASP.NET Core на `/tolyaprogram`).
+- Добавлен `healthz` endpoint и runbook диагностики `502 Bad Gateway` (порт 5000, systemd, nginx error log).
