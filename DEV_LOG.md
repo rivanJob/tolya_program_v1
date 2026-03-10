@@ -8,3 +8,5 @@
   - Home, Catalog, Clients, Stock, Settings.
 - Реализованы Bootstrap views для базовых сценариев просмотра и частичного редактирования.
 - Зафиксированы неперенесённые функции в `MIGRATION_GAPS.md`.
+
+- Добавлена пошаговая инструкция деплоя на Ubuntu: `DEPLOY_UBUNTU.md`.

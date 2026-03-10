@@ -23,3 +23,7 @@
 2. Настроить MariaDB/MySQL и применить `scheme.sql`.
 3. Обновить `MyWork2.Web/appsettings.json`.
 4. Выполнить `dotnet run --project MyWork2.Web`.
+
+
+## Развёртывание на Ubuntu
+Подробная production-инструкция вынесена в `DEPLOY_UBUNTU.md` (пакеты, БД, publish, systemd, Nginx).
