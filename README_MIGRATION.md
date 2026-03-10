@@ -33,3 +33,6 @@
 
 
 Поддержан сценарий reverse-proxy размещения на подпути: `https://prostochatbot.ru/tolyaprogram`.
+
+
+Добавлен troubleshooting для состояния `mywork2-web: inactive (dead)` в `DEPLOY_UBUNTU.md` (пошаговый recovery).

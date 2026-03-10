@@ -12,3 +12,4 @@
 - Добавлена пошаговая инструкция деплоя на Ubuntu: `DEPLOY_UBUNTU.md`.
 - Уточнены команды `dotnet restore/publish` для двух сценариев директорий и добавлен troubleshooting по ошибке `MSB1009`.
 - Добавлена конфигурация запуска под подпутём `/tolyaprogram` (Nginx + `ReverseProxy:PathBase`) для `prostochatbot.ru`.
+- Добавлен recovery-runbook для кейса `systemd: inactive (dead)` и `curl 127.0.0.1:5000` connection refused.

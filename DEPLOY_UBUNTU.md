@@ -251,13 +251,8 @@ curl -I https://prostochatbot.ru/tolyaprogram/
 ```
 
 
-Включить сайт:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/mywork2-web /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
-```
+> Команду `ln -s /etc/nginx/sites-available/mywork2-web ...` используйте **только** для сценария 7.1 (отдельный сайт).
+> Для сценария 7.2 (уже существующий `prostochatbot.ru`) редактируется текущий конфиг домена, отдельный site-файл подключать не нужно.
 
 ---
 
@@ -317,3 +312,56 @@ dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
 ```
 
    - Проверка: `find . -maxdepth 3 -name "*.csproj"`.
+
+
+---
+
+## 11) Быстрый recovery для вашего текущего состояния (service inactive/dead)
+
+Симптомы у вас сейчас:
+- `systemctl status mywork2-web` → `Active: inactive (dead)`
+- `curl http://127.0.0.1:5000` → connection refused
+
+Это значит, что сервис **не запущен** (часто не выполнены `start/enable`, либо приложение не опубликовано в путь из `ExecStart`).
+
+Выполните строго по порядку:
+
+```bash
+# 1) Убедиться, что публикация реально есть
+ls -la /var/www/mywork2-web/
+ls -la /var/www/mywork2-web/MyWork2.Web.dll
+
+# 2) Если файла нет — опубликовать заново
+cd /var/www/MyWork2.Web
+dotnet restore MyWork2.Web.csproj
+dotnet publish MyWork2.Web.csproj -c Release -o /var/www/mywork2-web
+sudo chown -R www-data:www-data /var/www/mywork2-web
+
+# 3) Перечитать unit и сразу включить+запустить
+sudo systemctl daemon-reload
+sudo systemctl enable --now mywork2-web
+
+# 4) Проверить статус и логи
+systemctl status mywork2-web --no-pager
+journalctl -u mywork2-web -n 100 --no-pager
+
+# 5) Проверить локальный порт
+curl -I http://127.0.0.1:5000
+```
+
+Если в статусе снова `inactive (dead)`, проверьте совпадение путей в unit-файле:
+
+```bash
+sudo systemctl cat mywork2-web
+```
+
+Должно быть:
+- `WorkingDirectory=/var/www/mywork2-web`
+- `ExecStart=/usr/bin/dotnet /var/www/mywork2-web/MyWork2.Web.dll`
+
+Если меняли unit-файл вручную — снова:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart mywork2-web
+```
