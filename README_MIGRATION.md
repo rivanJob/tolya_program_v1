@@ -36,3 +36,6 @@
 
 
 Добавлен troubleshooting для состояния `mywork2-web: inactive (dead)` в `DEPLOY_UBUNTU.md` (пошаговый recovery).
+
+
+В `DEPLOY_UBUNTU.md` добавлен готовый пример Nginx-конфига для `prostochatbot.ru` + `/tolyaprogram`.

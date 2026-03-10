@@ -256,6 +256,85 @@ curl -I https://prostochatbot.ru/tolyaprogram/
 
 ---
 
+
+
+### 7.3 Готовый пример для вашего текущего конфига `prostochatbot.ru`
+
+Да, идея правильная, но важно:
+1. Блоки `location = /tolyaprogram` и `location /tolyaprogram/` должны быть **внутри HTTPS server (443)**.
+2. Лучше разместить их **выше** `location /` с `try_files`, чтобы PHP-роутер не перехватывал этот путь.
+3. Для стабильности добавьте `proxy_redirect off;`.
+
+Пример:
+
+```nginx
+server {
+    listen 80;
+    server_name prostochatbot.ru www.prostochatbot.ru;
+    return 301 https://prostochatbot.ru$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name prostochatbot.ru www.prostochatbot.ru;
+
+    root /var/www/autopost_v2/public;
+    index index.php index.html;
+
+    ssl_certificate     /etc/nginx/ssl/autopost_v2/fullchain.crt;
+    ssl_certificate_key /etc/nginx/ssl/autopost_v2/certificate.key;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # ASP.NET Core под подпутём /tolyaprogram
+    location = /tolyaprogram {
+        return 301 /tolyaprogram/;
+    }
+
+    location /tolyaprogram/ {
+        proxy_pass         http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect     off;
+    }
+
+    # ваш текущий PHP-сайт
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+```
+
+Проверка после правок:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I https://prostochatbot.ru/tolyaprogram/
+curl -I http://127.0.0.1:5000
+```
+
+Если `curl 127.0.0.1:5000` не отвечает — сначала поднимите `mywork2-web` (см. раздел 11).
+
+
 ## 8) Проверка после запуска
 
 1. `systemctl status mywork2-web` — сервис активен.
