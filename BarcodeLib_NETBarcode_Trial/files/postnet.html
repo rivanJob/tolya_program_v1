@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+
+
+<title>Barcode for .NET - How to Generate POSTNET for .NET Applications</title>
+
+	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="SHORTCUT ICON" href="favicon.ico">
+<link href="bl_style.css" rel="stylesheet" type="text/css">
+<meta name="google-site-verification" content="a71_5Ku9ZXEpo0n2l06NmP48cxl3vKm9GnLF1jkm0-E" />
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write("\<script src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'>\<\/script>" );
+</script>
+
+<script>
+startList = function() {
+// Required update: if the page has no primary nav, don't do anything, don't give an error.
+  if (document.all&&document.getElementById) {
+    navRoot = document.getElementById("primarynav");
+    if (navRoot) {
+      for (i=0; i<navRoot.childNodes.length; i++) {
+        node = navRoot.childNodes[i];
+        if (node.nodeName=="LI") {
+          node.onmouseover=function() {
+            this.className+=" over";
+          }
+          node.onmouseout=function() {
+            this.className=this.className.replace(" over", "");
+          }
+} } } } }
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1366179-9']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+</script>
+
+<script type="text/javascript">
+
+function clickGO(){
+	document.getElementById("bl_lineartypes").href=document.getElementById("bl_chooselineartypes").value;
+	document.getElementById("bl_matrixtypes").href=document.getElementById("bl_choosematrixtypes").value;
+}
+</script>
+
+</head><body>
+<table class="bl_homepage_area" cellpadding="0" cellspacing="0"><tr><td width="4px" /><td class="bl_homepage_area_top" /><td width="4px" /></tr><tr><td class="bl_homepage_area_left" /><td class="bl_homepage_area_content1">
+	 
+	<div class="bl_homepage_header">
+		<a href="http://www.barcodelib.com/"><img src="bl_logo.jpg" width="308" height="77" border="0" alt=""></a>
+		<div class="bl_homepage_menu">
+		<a href="http://www.barcodelib.com" id="top" rel="nofollow">HOME</a>
+		<a href="http://www.barcodelib.com/purchase/main.html" rel="nofollow">PURCHASE</a>
+		<a href="http://www.barcodelib.com/sitemap/main.html" rel="nofollow">SITEMAP</a>
+		<a href="http://www.barcodelib.com/home/about_us.html" rel="nofollow" style="border:none; padding-right:0px;">COMPANY</a>
+		</div>
+		<div class="pHMenuInnerWrap" id="primary-nav">		
+			<ul id="primary-nav" class=l1>
+			<li style="width: 165px;"><a class="menuItemLink" href="http://www.barcodelib.com/java_barcode/main.html" title="Java Barcode">Barcode for Java</a></li>
+			<li style="width: 185px;">
+				<a class="menuItemLink2" href="http://www.barcodelib.com/net_barcode/main.html" title=".NET Barcode">Barcode for .NET</a>
+				<ul class=l2>
+					<li>
+					<table width="500px" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="bl_top_menu_title" width="240px">.NET Programing Control</td>
+						<td class="bl_top_menu_title" width="260px">.NET Reporting Control</td>
+					</tr>
+					<tr>
+						<td class="bl_top_menu_link" valign="top">
+							<a href="http://www.barcodelib.com/asp_net/main.html">Barcode for ASP.NET</a>
+							<a href="http://www.barcodelib.com/net_winforms/main.html">Barcode for .NET WinForms</a>
+						</td>
+						<td class="bl_top_menu_link" valign="top">
+							<a href="http://www.barcodelib.com/net_reporting_services/main.html">Barcode for Reporting Services</a>
+							<a href="http://www.barcodelib.com/net_crystal_reports/main.html">Barcode for Crystal Reports</a>
+							<a href="http://www.barcodelib.com/net_rdlc_reports/main.html">Barcode for RDLC Reports</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="bl_top_menu_download" colspan="2"><a href="http://www.barcodelib.com/net_barcode/file_download.php" title="Download C#, .NET, VB.NET Barcode Generator" rel="nofollow" onClick="javascript: _gaq.push(['_trackPageview', '/net_barcode/file_download.php']);">Download Free Trial <span>for .NET</span></a></td>
+					</tr>
+					</table>
+					</li>
+				</ul>
+			</li>
+			<li style="width: 225px;"><a class="menuItemLink" href="http://www.barcodelib.com/net_barcode_reader/main.html" title=".NET Barcode Reader">Barcode Reader for .NET</a></li>
+			<li style="width: 145px;"><a class="menuItemLink" href="http://www.barcodelib.com/barcode_fonts/barcode-fonts.html" title="Barcode Fonts">Barcode Fonts</a></li>
+			<li style="width: 175px;"><a class="menuItemLink" href="http://www.barcodelib.com/barcode_software/main.html" title="Barcode Generator Software">Barcode Generator</a></li>
+			<li style="width: 95px;"><a class="menuItemLink2" style="background-position:80px 13px;"  href="http://www.barcodelib.com/purchase/main.html" title="Purchase BarcodeLib.com Licenses" rel="nofollow">Purchase</a>
+			<ul class=l2 style="left: -135px; top: 36px; background-position:163px 0px;">
+					<li style="width: 250px;">
+					<table width="250px" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="bl_top_menu_title" width="250px">Purchase FAQs & Support</td>
+					</tr>
+					<tr>
+						<td class="bl_top_menu_link" valign="top">
+							<a href="http://www.barcodelib.com/license-agreement.html" rel="nofollow">Software License Agreement</a>
+							<a href="http://www.barcodelib.com/return_policy/main.html" rel="nofollow">Software Return Policy</a>
+							<a href="http://www.barcodelib.com/purchase/po_and_wire_transfers.html" rel="nofollow">Purchase Order & Wire Transfers</a>
+						</td>	
+					</tr>
+					</table>
+					</li>
+				</ul>
+			</li>
+			</ul>
+		</div>
+	</div>
+	 
+<table class="bl_page_content" cellpadding="0" cellspacing="0"><tr><td class="bl_page_content_left">
+
+
+
+
+	<!-- page-LeftMenu-start -->
+	<div class="bl_page_quickjumps">
+		<a class="bl_page_quickjump" href="../DeveloperGuide.html">Developer Guide</a>
+		<div class="bl_page_quickjump_lower_s">.NET POSTNET</div>
+		<a class="bl_page_quickjump" href="../Purchase-Barcode for .NET Suite.html">Licenses & Prices</a>
+	</div>
+	<div class="bl_page_testimonial"><img src="t4.gif" width="230" height="334" border="0" alt=""/></div>
+	<!-- page-LeftMenu-end -->
+
+
+
+
+	<div class="bl_page_partners">
+		Our Customers
+		<img src="bl_customer_gif.gif" width="181" height="122" border="0" alt="" style="margin-top:20px;" /></div><div class="bl_page_contact"><span>Contact Us</span>
+		Email:
+		<a href="mailto:support@barcodelib.com">support@barcodelib.com</a>
+	</div>
+	
+</td><td class="bl_page_content_right">
+	
+	<div class="bl_thumbnail">
+	<!-- page-thumb-start -->
+	<!-- page-thumb-end -->
+	</div>
+
+	
+
+
+
+	<h1>How to Generate POSTNET in .NET Projects</h1>
+	<br/><br/>
+
+
+	<div class="bl_paragraph">Quick Navigate:
+	<ul class="bl_unorderlist">
+			<li><a href="#howto1" class=display>How To Generate POSTNET in .NET Class</a></li>
+			<li><a href="#howto2" class=display>How to Generate POSTNET in IIS</a></li>
+			<li><a href="#propertysettings" class=display>POSTNET Barcode Property Settings</a></li>
+	</ul>
+	</div>
+	
+	
+
+
+
+	<div class="bl_sectitle" id="howto1">How To Generate POSTNET in .NET Class<a href="#top"><img src="bl_back2top.jpg" width="78" height="16" border="0" alt="" /></a>
+	</div>
+		
+	<div class="bl_paragraph">
+		 The following C#.NET code illustrates how to generate a POSTNET barcode in C# class.
+	</div>  
+    <div class="bl_code">
+    <pre class="csharpcode">    BarcodeLib.Barcode.Linear barcode = <span class="kwrd">new</span> BarcodeLib.Barcode.Linear();
+    
+    barcode.Type = BarcodeType.POSTNET;
+    
+    <span class="rem">// should be 5, 6, 9, 11 digits</span>
+    barcode.Data = <span class="str">"12345678901"</span>;
+    
+    barcode.UOM = UnitOfMeasure.PIXEL;
+    barcode.BarWidth = 1;
+    barcode.BarHeight = 80;
+    barcode.LeftMargin = 10;
+    barcode.RightMargin = 10;
+    barcode.TopMargin = 10;
+    barcode.BottomMargin = 10;
+    
+    barcode.ImageFormat = System.Drawing.Imaging.ImageFormat.Png;
+    
+    <span class="rem">// more barcode settings here</span>
+                            
+    <span class="rem">// save barcode image into your system</span>
+    barcode.drawBarcode(<span class="str">"c://barcode.png"</span>);
+    
+    <span class="rem">// generate barcode &amp; output to byte array</span>
+    <span class="kwrd">byte</span>[] barcodeInBytes = barcode.drawBarcodeAsBytes();
+    
+    <span class="rem">// generate barcode to Graphics object</span>
+    Graphics graphics = ...
+    barcode.drawBarcode(graphics);
+    
+    <span class="rem">// generate barcode and output to Bitmap object</span>
+    Bitmap barcodeInBitmap = barcode.drawBarcode();
+    
+    <span class="rem">// generate barcode and output to HttpResponse object</span>
+    HttpResponse response = ...;
+    barcode.drawBarcode(response);
+    
+    <span class="rem">// generate barcode and output to Stream object</span>
+    Stream stream = ...;
+    barcode.drawBarcode(stream);</pre>
+	</div>
+
+
+	<div class="bl_paragraph">
+		 The following VB.NET code illustrates how to generate a POSTNET barcode in VB.NET class.
+	</div>  
+    <div class="bl_code">
+    <pre class="csharpcode">    <span class="kwrd">Dim</span> barcode <span class="kwrd">As</span> <span class="kwrd">New</span> BarcodeLib.Barcode.Linear()
+
+    barcode.Type = BarcodeType.POSTNET
+
+    <span class="rem">' should be 5, 6, 9, 11 digits</span>
+    barcode.Data = <span class="str">"12345678901"</span>
+
+    barcode.UOM = UnitOfMeasure.PIXEL
+    barcode.BarWidth = 1
+    barcode.BarHeight = 80
+    barcode.LeftMargin = 10
+    barcode.RightMargin = 10
+    barcode.TopMargin = 10
+    barcode.BottomMargin = 10
+
+    barcode.ImageFormat = System.Drawing.Imaging.ImageFormat.Png
+
+    <span class="rem">' more barcode settings here</span>
+
+    <span class="rem">' save barcode image into your system</span>
+    barcode.drawBarcode(<span class="str">"c://barcode.png"</span>)</pre>
+	</div>
+
+
+
+
+	<div class="bl_sectitle" id="howto2">How to Generate POSTNET in IIS Without Visual Studio<a href="#top"><img src="bl_back2top.jpg" width="78" height="16" border="0" alt="" /></a>
+	</div>
+		
+	<ol class="bl_orderlist">
+		
+		<li>Under downloaded <b>trial</b> package, copy <b>barcode</b> folder to your IIS folder, e.g. <b>C:\Inetpub</b>.</li>
+			   	<li>Create a new virtual directory in IIS, named <b>barcode</b>, and link to the above "barcode" folder. Restart IIS.</li>
+			   	<li>To test your installation, open your web browser and navigate to: <b>http://YourDomain:port/barcode/linear.aspx?Type=26&Data=12345678901</b></li>
+				<li>To create barcode image in your aspx or html page, you need pass the url to IMG tag src value. For example:
+				<br/>
+			   	<span class="content_highlight">
+			   	<b>&lt;img src="http://YourDomain:port/barcode/linear.aspx?Type=26&Data=12345678901" /></b>
+			   	<br/>
+				<i>Using this method, it will not generate any barcode images in your IIS server side.</i></li>
+	</ol>
+    
+
+    
+	
+
+
+
+    <div class="bl_sectitle" id="propertysettings">POSTNET Barcode Property Settings<a href="#top"><img src="bl_back2top.jpg" width="78" height="16" border="0" alt="" /></a>
+	 </div><ol class="bl_orderlist">
+	
+	<li>Set the <b>Type</b> property to <b>BarcodeType.POSTNET</b>.<br/>Web Stream URL Parameter: Type. <br/>Value: 26. <br/>Sample: <b>&Type=26</b>.	</li><li>Set the <b>Data</b> property with the value to encode.<br/> Type is <b>string</b>.<br/>Web Stream URL Parameter: Data.</li><ul class="bl_unorderlist">
+		
+		<li>Valid Data Scope:</li><ul class="bl_unorderlist">
+		
+		<li>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</li></ul><li>Valid Data Format:The valid data length should be <b>5</b>, <b>6</b>, <b>9</b>, <b>11</b> digits. And extra last digit is the checksum digit, do not include it in the Data property.</li><ul class="bl_unorderlist">
+		
+		<li>5 digit (plus check digit) - containing the basic ZIP Code only, referred to as the "A" code.</li><li>6 digit (plus check digit) - containing the last 2 digits of the ZIP Code and the 4 digits of the ZIP+4 Code, referred to as a "B" code. </li><li>9 digit (plus check digit) - containing the ZIP Code and ZIP+4 Code, referred to as the "C" code. </li><li>11 digit (plus check digit) - containing the ZIP Code, ZIP+4 Code, and the delivery point code. This is usually referred to as the DPBC, or Delivery Point Bar Code.</li></ul><li>Sample: "<b>12345678901</b>".</li></ul><li><b>AddCheckSum</b> property is not applied here. <i>Barcode Library will automatically add one checksum character using Modulo 10.</i></li><li>Barcode <b>Size</b> Settings.</li><ul class="bl_unorderlist">
+		
+		<li>Set property <b>UOM</b> (Unit of Measure) for properties BarWidth, BarHeight, LeftMargin and TopMargin. <br/>Valid values are UnitOfMeasure.Pixel (0), UnitOfMeasure.CM (1), UnitOfMeasure.Inch (2).<br/>Default is UnitOfMeasure.Pixel (0). <br/>Web Stream URL Parameter: UOM. Valid values are: 0, 1, 2.</li><li> Set the <b>ImageWidth</b> and <b>ImageHeight</b> properties. <br/>Both types are <b>float</b>.<br/>BarWidth default is 0 pixel.<br/>BarHeight default is 0 pixel.<br/>Web Stream URL Parameter: ImageWidth and ImageHeight.</li><li>Set the <b>BarWidth</b> (for bar cell width) and <b>BarHeight</b> (for bar cell height) properties. <br/>Both types are <b>float</b>.<br/>BarWidth default is 1 pixel.<br/>BarHeight default is 80 pixel.<br/>Web Stream URL Parameter: BarWidth and BarHeight.</li><li>Set the <b>BarHeightRatio</b>, barcode short bar height to tall bar height ratio. <br/>Both types are <b>float</b>. Default is 0.4f.<br/>Web Stream URL Parameter: BarHeightRatio.</li><li>Set the <b>LeftMargin</b>, <b>RightMargin</b>, <b>TopMargin</b> and                      <b>BottomMargin</b> properties.<br/>Types are all <b>float</b>. Default are 10.<br/>Web Stream URL Parameter: LeftMargin, RightMargin, TopMargin, BottomMargin.</li><li>Set the <b>ResizeImage</b> property to "true" and our component will resize the barcode image if manual setting is invalid. <br/>Type is <b>bool</b>. Default is false.<br/>Web Stream URL Parameter: ResizeImage.</li><li>Set the <b>Resolution</b> property (Value is expressed in DPI - Dots per inch). <br/>Type is <b>int</b>. Default is 96 dpi.<br/>Web Stream URL Parameter: Resolution.</li></ul><li>Setting up <b>text style</b> in barcode image.</li><ul class="bl_unorderlist">
+		
+		<li>Set the <b>ShowText</b> properties. If ShowText is True, barcode data will be displayed with the barcode.<br/>Type is <b>bool</b>.Default is True.<br/>Web Stream URL Parameter: ShowText. Valid values are: "true", and "false".</li><li>Set the <b>TextFont</b> property. The font used to display text in barcode image.<br/>Type is System.Drawing.<b>Font</b>. Default is new Font("Arial", 9f, FontStyle.Regular).<br/>Web Stream URL Parameter: TextFont. Value format: [font name]|[font size]|[font style]. Sample Values: "Arial|12|Bold,Underline"</li></ul><li>Set <b>Color Related</b> properties. </li><ul class="bl_unorderlist">
+		
+		<li>Set the <b>BackgroundColor</b> property. Barcode background color can be changed.<br/>Type is System.Drawing.<b>Color</b>.Default is BackgroundColor = Color.White.<br/>Web Stream URL Parameter: BackgroundColor.</li><li>Set the <b>BarColor</b> property. Barcode bars color can be changed.<br/>Type is System.Drawing.<b>Color</b>.Default is BarColor = Color.Black.<br/>Web Stream URL Parameter: BarColor.</li><li>Set the <b>TextFontColor</b> property. Barcode human-readable data text color can be changed.<br/>Type is System.Drawing.<b>Color</b>.Default is TextFontColor = Color.Black.<br/>Web Stream URL Parameter: TextFontColor.</li></ul><li>Set the <b>ImageFormat</b> property for barcode image type.</li><ul class="bl_unorderlist">
+		
+		<li>Type is System.Drawing.Imaging.<b>ImageFormat</b>.<br/>Default value is ImageFormat.Png.<br/>Web Stream URL Parameter: ImageFormat. Valid values are: gif, jpeg, png, bmp, tiff.</li></ul><li>Set <b>Rotate</b> property, if you want to rotate barcode image. Valid values are as below.<br/>Default Value is 0 (RotateOrientation.BottomFacingDown).<br/>Web Stream URL Parameter: Rotate. Valid values are: 0, 1, 2, 3.</li><ul class="bl_unorderlist">
+		
+		<li>0 (RotateOrientation.BottomFacingDown)</li><li>1 (RotateOrientation.BottomFacingLeft)</li><li>2 (RotateOrientation.BottomFacingUp)</li><li>3 (RotateOrientation.BottomFacingRight)</li></ul></ol>
+
+
+
+
+
+    <div class="bl_sectitle" id="settings">Property Settings for Each Barcode Type<a href="#top"><img src="bl_back2top.jpg" width="78" height="16" border="0" alt="" /></a>
+	 </div>
+
+	 <div class="bl_paragraph"><i>Please choose your target barcode type and click button "<b>Go</b>" to see details.</i>
+	 </div>
+
+     <div class="bl_selectbarcode">
+            <div class="bl_barcodetypes">
+					Linear (1D) Barcodes:
+					<select id="bl_chooselineartypes" class="bl_types">
+						<option value="codabar.html" selected>Codabar</option>
+						<option value="code2of5.html">Code 2 of 5</option>
+						<option value="code11.html">Code 11</option>
+						<option value="code39.html">Code 39</option>
+						<option value="code93.html">Code 93</option>
+						<option value="code128.html">Code 128</option>
+						<option value="ean8.html">EAN-8</option>
+						<option value="ean13.html">EAN-13</option>
+						<option value="ean128.html">EAN-128/GS1-128</option>
+						<option value="interleaved25.html">Interleaved 2 of 5</option>
+						<option value="itf14.html">ITF-14</option>
+						<option value="msi.html">MSI Plessey</option>
+						<option value="onecode.html">Intelligent Mail (Onecode)</option>
+						<option value="planet.html">PLANET</option>
+						<option value="postnet.html">POSTNET</option>
+						<option value="rm4scc.html">RM4SCC</option>
+						<option value="upca.html">UPC-A</option>
+						<option value="upce.html">UPC-E</option>
+					</select>
+			</div>
+			<a id="bl_lineartypes" onclick="clickGO()" href=""><img src="bl_go.jpg" width="41" height="23" border="0" alt=""/></a>
+					
+			<div class="bl_barcodetypes">
+					Matrix (2D) Barcodes:
+					<select id="bl_choosematrixtypes" class="bl_types">
+						<option value="qrcode.html" selected>QR Code</option>
+						<option value="pdf417.html">PDF-417</option>
+						<option value="data_matrix.html">Data Matrix</option>
+					</select>
+			</div>
+            <a id="bl_matrixtypes" onclick="clickGO()" href=""><img src="bl_go.jpg" width="41" height="23" border="0" alt=""/></a>
+	</div>
+    <br/><br/>
+
+
+
+
+
+
+
+</td></tr></table></td><td class="bl_homepage_area_right" /></tr><tr><td /><td class="bl_homepage_area_bottom" /><td /></tr></table>
+	 
+
+
+
+<div class="bl_homepage_copyright">
+	Copyright &copy; 2013 BarcodeLib.com. All rights reserved. 
+</div>
+			
+	 
+	 
+</body></html>
+
+
+
