@@ -495,3 +495,81 @@ sudo systemctl enable --now mywork2-web
 curl -I http://127.0.0.1:5000/healthz
 curl -I https://prostochatbot.ru/tolyaprogram/
 ```
+
+
+---
+
+## 13) Если 502 остаётся после publish/start (ваш текущий кейс)
+
+Вы уже сделали `restore/publish/enable --now`, но 502 всё ещё есть. Значит, нужна точечная проверка активной конфигурации и процесса.
+
+### Шаг A. Проверить, что Nginx реально использует нужный `location /tolyaprogram/`
+
+```bash
+sudo nginx -T | rg -n "server_name|tolyaprogram|proxy_pass|listen 443"
+```
+
+Ищем в **активном** конфиге:
+- `location /tolyaprogram/ { ... }`
+- `proxy_pass http://127.0.0.1:5000;`
+
+Если этого нет в выводе `nginx -T`, вы редактировали не тот файл.
+
+### Шаг B. Проверить backend локально (до Nginx)
+
+```bash
+systemctl status mywork2-web --no-pager
+journalctl -u mywork2-web -n 200 --no-pager
+ss -ltnp | rg ':5000' || true
+curl -v http://127.0.0.1:5000/healthz
+```
+
+Если тут ошибка — это не Nginx-проблема, это backend/service.
+
+### Шаг C. Запустить приложение вручную от того же пользователя, что в systemd
+
+```bash
+sudo -u www-data /usr/bin/dotnet /var/www/mywork2-web/MyWork2.Web.dll
+```
+
+Если приложение падает, ошибка сразу будет в консоли (обычно connection string/доступ к БД/конфиг).
+
+### Шаг D. Проверить точный unit-файл и окружение
+
+```bash
+sudo systemctl cat mywork2-web
+```
+
+Проверьте обязательно:
+- `WorkingDirectory=/var/www/mywork2-web`
+- `ExecStart=/usr/bin/dotnet /var/www/mywork2-web/MyWork2.Web.dll`
+- `Environment=ASPNETCORE_URLS=http://127.0.0.1:5000`
+
+### Шаг E. Проверить логи Nginx именно в момент запроса
+
+```bash
+sudo tail -f /var/log/nginx/error.log /var/log/nginx/access.log
+```
+
+В другом окне:
+
+```bash
+curl -vk https://prostochatbot.ru/tolyaprogram/
+```
+
+По строке в `error.log` обычно сразу видно причину:
+- `connect() failed (111: Connection refused)` → backend не слушает 5000.
+- `upstream sent too big header` → увеличить `proxy_buffer_size` и related buffers.
+- `no live upstreams` → ошибочная upstream-конфигурация.
+
+### Быстрый hard-restart цикл
+
+```bash
+sudo systemctl restart mywork2-web
+sleep 2
+systemctl status mywork2-web --no-pager
+curl -I http://127.0.0.1:5000/healthz
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I https://prostochatbot.ru/tolyaprogram/
+```

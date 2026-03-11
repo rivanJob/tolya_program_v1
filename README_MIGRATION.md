@@ -42,3 +42,6 @@
 
 
 Добавлена отдельная секция `502 Bad Gateway` диагностики в `DEPLOY_UBUNTU.md` (systemd + nginx + healthz).
+
+
+Для кейса "502 остаётся после publish/start" добавлен отдельный чеклист (Раздел 13) в `DEPLOY_UBUNTU.md`.

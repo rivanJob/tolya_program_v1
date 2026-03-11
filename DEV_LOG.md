@@ -15,3 +15,4 @@
 - Добавлен recovery-runbook для кейса `systemd: inactive (dead)` и `curl 127.0.0.1:5000` connection refused.
 - Добавлен готовый пример Nginx для текущего боевого конфига `prostochatbot.ru` (PHP-сайт + ASP.NET Core на `/tolyaprogram`).
 - Добавлен `healthz` endpoint и runbook диагностики `502 Bad Gateway` (порт 5000, systemd, nginx error log).
+- Добавлен расширенный чеклист (Раздел 13) для persistent 502 после publish/start: `nginx -T`, ручной запуск от `www-data`, tail nginx/systemd логов.
