@@ -45,3 +45,6 @@
 
 
 Для кейса "502 остаётся после publish/start" добавлен отдельный чеклист (Раздел 13) в `DEPLOY_UBUNTU.md`.
+
+
+Добавлен скрипт автодиагностики сервера: `ops/check_mywork2_service.sh` (systemd/nginx/port/healthz).

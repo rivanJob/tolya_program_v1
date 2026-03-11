@@ -463,7 +463,7 @@ systemctl status mywork2-web --no-pager
 journalctl -u mywork2-web -n 100 --no-pager
 
 # 2) Слушается ли порт 5000
-ss -ltnp | rg ':5000' || true
+ss -ltnp | grep ':5000' || true
 curl -I http://127.0.0.1:5000
 curl -I http://127.0.0.1:5000/healthz
 
@@ -506,7 +506,7 @@ curl -I https://prostochatbot.ru/tolyaprogram/
 ### Шаг A. Проверить, что Nginx реально использует нужный `location /tolyaprogram/`
 
 ```bash
-sudo nginx -T | rg -n "server_name|tolyaprogram|proxy_pass|listen 443"
+sudo nginx -T | grep -nE "server_name|tolyaprogram|proxy_pass|listen 443"
 ```
 
 Ищем в **активном** конфиге:
@@ -520,7 +520,7 @@ sudo nginx -T | rg -n "server_name|tolyaprogram|proxy_pass|listen 443"
 ```bash
 systemctl status mywork2-web --no-pager
 journalctl -u mywork2-web -n 200 --no-pager
-ss -ltnp | rg ':5000' || true
+ss -ltnp | grep ':5000' || true
 curl -v http://127.0.0.1:5000/healthz
 ```
 
@@ -573,3 +573,24 @@ sudo nginx -t
 sudo systemctl reload nginx
 curl -I https://prostochatbot.ru/tolyaprogram/
 ```
+
+
+---
+
+## 15) Автодиагностика одной командой
+
+В репозитории есть скрипт: `ops/check_mywork2_service.sh`.
+
+Скопируйте его на сервер и запустите от root:
+
+```bash
+bash ops/check_mywork2_service.sh
+```
+
+Он проверит:
+- systemd статус/код завершения/логи;
+- слушается ли `127.0.0.1:5000`;
+- `curl` на `/healthz`;
+- активный nginx-конфиг (`nginx -T`) и `error.log`.
+
+> Важно: запускайте команды по одной строке. Не вставляйте в shell текст prompt вида `root@server...#` внутрь команды.

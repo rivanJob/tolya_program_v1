@@ -16,3 +16,4 @@
 - Добавлен готовый пример Nginx для текущего боевого конфига `prostochatbot.ru` (PHP-сайт + ASP.NET Core на `/tolyaprogram`).
 - Добавлен `healthz` endpoint и runbook диагностики `502 Bad Gateway` (порт 5000, systemd, nginx error log).
 - Добавлен расширенный чеклист (Раздел 13) для persistent 502 после publish/start: `nginx -T`, ручной запуск от `www-data`, tail nginx/systemd логов.
+- Добавлен скрипт автодиагностики сервера `ops/check_mywork2_service.sh` для кейсов persistent 502.
